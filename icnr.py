@@ -2,7 +2,11 @@ import tensorflow as tf
 
 
 class ICNR:
-    """ICNR initializer for checkerboard artifact free sub pixel convolution (https://arxiv.org/pdf/1707.02937.pdf)
+    """ICNR initializer for checkerboard artifact free sub pixel convolution
+
+    Ref:
+     [1] Andrew Aitken et al. Checkerboard artifact free sub-pixel convolution
+     https://arxiv.org/pdf/1707.02937.pdf)
 
     Args:
     initializer: initializer used for sub kernels (orthogonal, glorot uniform, etc.)
