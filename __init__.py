@@ -1,1 +1,1 @@
-from icnr import ICNR
+from .icnr import ICNR
