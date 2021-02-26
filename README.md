@@ -3,10 +3,12 @@ Tensorflow implementation of ICNR initialization used in https://arxiv.org/pdf/1
 
 ![screenshot](kernel_vis.png)
 
+Updated for TF v2.4.
+
 ## Usage example:
 
 Wrap up your initialization with ICRN and you are ready to go:
 ```python
-slim.conv2d(... weights_initializer=ICNR(tf.glorot_uniform_initializer(), scale=2))
-```
+layers.Conv2DTranspose(..., strides=scale, kernel_initializer=ICNR(GlorotUniform(), scale))
 
+```

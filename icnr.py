@@ -19,16 +19,17 @@ class ICNR:
         self.scale = scale
         self.initializer = initializer
 
-    def __call__(self, shape, dtype, partition_info=None):
+    def __call__(self, shape, dtype):
         shape = list(shape)
         if self.scale == 1:
             return self.initializer(shape)
 
         new_shape = shape[:3] + [shape[3] // (self.scale ** 2)]
-        x = self.initializer(new_shape, dtype, partition_info)
+        x = self.initializer(new_shape, dtype)
         x = tf.transpose(x, perm=[2, 0, 1, 3])
-        x = tf.image.resize_nearest_neighbor(x, size=(shape[0] * self.scale, shape[1] * self.scale))
-        x = tf.space_to_depth(x, block_size=self.scale)
+        size = (shape[0] * self.scale, shape[1] * self.scale)
+        x = tf.image.resize(x, size=size, method="nearest")
+        x = tf.nn.space_to_depth(x, block_size=self.scale)
         x = tf.transpose(x, perm=[1, 2, 0, 3])
 
         return x
